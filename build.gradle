@@ -1,0 +1,74 @@
+group 'vn.panota.modular'
+version '1.0'
+
+apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'maven-publish'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+}
+
+ext {
+    panotaModularVersion = '1.0'
+    vertxVersion = '3.8.4'
+    vertxRedisVersion = '3.5.2.CR3'
+    junitJupiterVersion = '5.3.2'
+    assertjCoreVersion = '3.8.0'
+    guavaVersion = '28.1-jre'
+}
+
+dependencies {
+    compile('vn.panota.modular:base-module') {  version { branch = 'master' } }
+    compile group: 'io.vertx', name: 'vertx-core', version: "${vertxVersion}"
+    compile group: 'io.vertx', name: 'vertx-web', version: "${vertxVersion}"
+    compile group: 'io.vertx', name: 'vertx-config', version: "${vertxVersion}"
+    compile group: 'io.vertx', name: 'vertx-mongo-client', version: "${vertxVersion}"
+
+    testCompile group: 'io.vertx', name: 'vertx-junit5', version: "${vertxVersion}"
+    testCompile "org.assertj:assertj-core:${assertjCoreVersion}"
+
+    testCompile "org.junit.jupiter:junit-jupiter-params:${junitJupiterVersion}"
+    testCompile "org.junit.jupiter:junit-jupiter-api:${junitJupiterVersion}"
+    testCompile "org.junit.jupiter:junit-jupiter-engine:${junitJupiterVersion}"
+}
+
+jar {
+    // Keep jar clean:
+    exclude 'META-INF/*.SF', 'META-INF/*.DSA', 'META-INF/*.RSA', 'META-INF/*.MF'
+    manifest {
+        attributes 'Main-Class': 'vn.panota.growth.MainStarter',
+                'Class-Path': configurations.runtime.files.collect { "lib/$it.name" }.join(' ')
+    }
+}
+
+
+task copyJarToDocker(type: Copy) {
+    from "build/libs/growth-hacking-module-${version}.jar"
+    into "$buildDir/docker"
+}
+
+task copyDependenciesToDocker(type: Copy) {
+    from configurations.runtime
+    into "$buildDir/docker/lib"
+}
+
+task copyConfigurationToDocker(type: Copy) {
+    from "se-config"
+    into "$buildDir/docker/config"
+}
+
+build.finalizedBy(copyJarToDocker)
+build.finalizedBy(copyDependenciesToDocker)
+build.finalizedBy(copyConfigurationToDocker)

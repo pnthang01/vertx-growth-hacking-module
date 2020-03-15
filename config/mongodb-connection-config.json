@@ -1,0 +1,8 @@
+{
+  "gh_mongodb": {
+    "db_name": "standard_db",
+    "useObjectId": true,
+    "host": "mongodb",
+    "port": 27017
+  }
+}

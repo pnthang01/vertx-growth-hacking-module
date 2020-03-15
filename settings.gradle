@@ -1,0 +1,12 @@
+rootProject.name = 'growth-hacking-module'
+
+sourceControl {
+    gitRepository("https://github.com/pnthang01/vertx-base-module.git") {
+        producesModule("vn.panota.modular:base-module")
+    }
+}
+sourceControl {
+    gitRepository("https://github.com/pnthang01/vertx-user-module.git") {
+        producesModule("vn.panota.modular:user-module")
+    }
+}

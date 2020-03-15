@@ -1,0 +1,17 @@
+{
+  "zookeeperHosts":"zookeeper:2181",
+  "sessionTimeout":20000,
+  "connectTimeout":3000,
+  "rootPath":"io.vertx",
+  "retry": {
+    "initialSleepTime":100,
+    "intervalTimes":10000,
+    "maxTimes":5
+  },
+  "event_bus": {
+    "host": "localhost",
+    "port": 11910,
+    "public_host": "user-services",
+    "public_port": 11910
+  }
+}
