@@ -1,12 +1,5 @@
 package vn.panota.growth.dao.mongodb;
 
-import io.netty.util.internal.StringUtil;
-import io.vertx.core.AsyncResult;
-import io.vertx.core.Handler;
-import io.vertx.core.json.JsonObject;
-import vn.panota.base.bridge.mongodb.Cmd;
-import vn.panota.growth.enums.GrowthHackingType;
-
 public class Temp {
 
 //    public void createNewsLetterRegistration(String tenantId, String email, Handler<AsyncResult<JsonObject>> handler) {

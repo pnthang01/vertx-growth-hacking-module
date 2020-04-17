@@ -30,7 +30,7 @@ ext {
 }
 
 dependencies {
-    compile('vn.panota.modular:base-module') {  version { branch = 'master' } }
+    compile group: 'vn.panota.modular', name: 'base-module', version: '1.0'
     compile group: 'io.vertx', name: 'vertx-core', version: "${vertxVersion}"
     compile group: 'io.vertx', name: 'vertx-web', version: "${vertxVersion}"
     compile group: 'io.vertx', name: 'vertx-config', version: "${vertxVersion}"

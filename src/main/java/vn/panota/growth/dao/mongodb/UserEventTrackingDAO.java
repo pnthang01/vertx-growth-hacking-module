@@ -7,7 +7,6 @@ import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 import io.vertx.core.logging.Logger;
 import io.vertx.core.logging.LoggerFactory;
-import vn.panota.base.bridge.mongodb.Cmd;
 import vn.panota.base.dao.AbstractMongodbDAO;
 
 public class UserEventTrackingDAO extends AbstractMongodbDAO {
